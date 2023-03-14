@@ -1,17 +1,18 @@
 {
   "development": {
-    "username": "root",
-    "password": null,
-    "database": "database_development",
-    "host": "127.0.0.1",
+    "username": "gotviyladmin",
+    "password": "2sOLpNp7DrJNisYO",
+    "database": "gotviyladmin",
+    "host": "gotviyladmin.mysql.db",
     "dialect": "mysql",
     "operatorsAliases": false
   },
   "test": {
     "username": "root",
-    "password": null,
-    "database": "database_test",
+    "password": "password",
+    "database": "blog",
     "host": "127.0.0.1",
+    "port": 3308,
     "dialect": "mysql",
     "operatorsAliases": false
   },

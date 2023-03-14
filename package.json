@@ -36,6 +36,7 @@
         "moment": "^2.26.0",
         "mongoose": "^5.9.16",
         "mysql": "^2.18.1",
+        "mysql2": "^3.2.0",
         "node-dependency-injection": "^2.6.3",
         "nodemailer": "^6.4.8",
         "path": "^0.12.7",
