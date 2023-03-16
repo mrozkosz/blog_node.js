@@ -24,5 +24,6 @@ const routes = require('./routes')(di);
 
 app.use(routes);
 app.use('/.well-known', express.static(path.join(__dirname, 'public/.well-known')));
+app.use('/', express.static(path.join(__dirname, 'public/page')));
 
 module.exports = app;
