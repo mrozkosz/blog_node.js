@@ -2,6 +2,8 @@
  * @openapi
  * /login:
  *  post:
+ *   tags:
+ *    - auth
  *   summary: Retrieve a single user and Auth token
  *   description: #
  *   requestBody:
@@ -16,6 +18,8 @@
  *
  * /me:
  *   get:
+ *     tags:
+ *       - auth
  *     summary: Retrieve a single user
  *     description: #
  *     security:

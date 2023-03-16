@@ -51,7 +51,7 @@ module.exports = (sequelize, Sequelize) => {
 
     Post.associate = function (db) {
         Post.belongsTo(db.User, {
-            as: 'postAuthor',
+            as: 'user',
             foreignKey: 'author',
         });
     };

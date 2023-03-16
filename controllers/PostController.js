@@ -30,7 +30,7 @@ class PostController {
             },
             include: [
                 {
-                    association: "postAuthor",
+                    association: "user",
                     attributes: {
                         exclude: ['password', 'dayOfBirth', 'availableDays'],
                     },
@@ -68,7 +68,7 @@ class PostController {
             },
             include: [
                 {
-                    association: "postAuthor",
+                    association: "user",
                     attributes: {
                         exclude: ['password', 'dayOfBirth', 'availableDays'],
                     },

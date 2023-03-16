@@ -2,6 +2,8 @@
  * @openapi
  * /post:
  *   post:
+ *     tags:
+ *       - post
  *     summary: Create blog post
  *     description: #
  *     security:
@@ -17,6 +19,8 @@
  *
  * /post/{id}:
  *   put:
+ *     tags:
+ *       - post
  *     summary: Update blog post
  *     description: #
  *     security:
@@ -38,6 +42,8 @@
  *
  * /posts:
  *   get:
+ *     tags:
+ *       - post
  *     summary: Retrieve posts
  *     description: #
  *     parameters:
@@ -70,6 +76,8 @@
  *         description: Returns a mysterious string.
  * /post/{_id}:
  *   get:
+ *     tags:
+ *       - post
  *     summary: Retrieve a single post
  *     description: #
  *     parameters:
@@ -84,6 +92,8 @@
  *
  * /post/{__id}:
  *   delete:
+ *     tags:
+ *       - post
  *     summary: Retrieve no content
  *     description: #
  *     security:

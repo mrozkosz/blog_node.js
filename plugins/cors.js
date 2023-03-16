@@ -13,11 +13,12 @@ module.exports = (app) => {
     ];
     const corsOptions = {
         origin(origin, callback) {
-            if (originsWhitelist.includes(origin) || !origin) {
-                callback(null, true);
-            } else {
-                callback(new Error('Not allowed by CORS'));
-            }
+            // if (originsWhitelist.includes(origin) || !origin) {
+            //     callback(null, true);
+            // } else {
+            //     callback(new Error('Not allowed by CORS'));
+            // }
+            callback(null, true);
         },
         credentials: true
     };
