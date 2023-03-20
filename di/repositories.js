@@ -3,6 +3,7 @@ const RecoverPasswordRepository = require('../repositories/RecoverPasswordReposi
 const RoleRepository = require('../repositories/RoleRepository');
 const PostRepository = require('../repositories/PostRepository');
 const ImageRepository = require('../repositories/ImageRepository');
+const UserRoleRepository = require('../repositories/UserRoleRepository')
 
 module.exports = (container) => {
     container.register('repositories.user', UserRepository);
@@ -13,6 +14,7 @@ module.exports = (container) => {
     );
 
     container.register('repositories.role', RoleRepository);
+    container.register('repositories.userRole', UserRoleRepository);
     container.register('repositories.post', PostRepository);
     container.register('repositories.image', ImageRepository);
 

@@ -58,16 +58,6 @@
  *     responses:
  *       200:
  *         description: Returns a mysterious string.
- * @swagger
- * components:
- *   schemas:
- *     PostSchema:
- *       type: object
- *       properties:
- *         files:
- *           type: files
- *           description: Post title - required
- *           example: To pierwszy wpis na blogu
  */
 
 const express = require('express');

@@ -11,7 +11,10 @@ module.exports = (container) => {
             new Reference('services.sendEmailToRecoverPasswordHandler')
         )
         .addArgument(new Reference('repositories.recoverPassword'))
-        .addArgument(new Reference('repositories.user'));
+        .addArgument(new Reference('repositories.user'))
+        .addArgument(new Reference('repositories.role'))
+        .addArgument(new Reference('repositories.userRole'))
+        .addArgument(new Reference('services.sendEmailToNewUsersHandler'))
 
     container.register('controller.post', PostController)
         .addArgument(new Reference('repositories.post'));

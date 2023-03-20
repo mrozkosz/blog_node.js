@@ -4,18 +4,25 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const crypto = require('crypto');
 const moment = require('moment');
+const { Role } = require('../models');
 
 class AuthController {
     constructor(
         loginHandler,
         sendEmailToRecoverPasswordHandler,
         recoverPasswordRepository,
-        userRepository
+        userRepository,
+        roleRepository,
+        userRoleRepository,
+        sendEmailToNewUsersHandler
     ) {
         this.loginHandler = loginHandler;
         this.sendEmailToRecoverPasswordHandler = sendEmailToRecoverPasswordHandler;
         this.recoverPasswordRepository = recoverPasswordRepository;
         this.userRepository = userRepository;
+        this.roleRepository = roleRepository;
+        this.userRoleRepository = userRoleRepository;
+        this.sendEmailToNewUsersHandler = sendEmailToNewUsersHandler;
     }
 
     async login(req, res) {
@@ -40,6 +47,34 @@ class AuthController {
         });
     }
 
+    async signup(req, res){
+        const { email, password } = req.body;
+
+        const newUser = {email, password: bcrypt.hashSync(password, 12), dayOfBirth:'1990-01-01', firstName:"", lastName:"", }
+        const user = await this.userRepository.create(newUser);
+
+        if(!user){
+            return res.status(HttpStatuses.BAD_REQUEST).send("User not created!");
+        }
+
+        const role = await this.roleRepository.findOne({where:{name: Role.ROLE_EMPLOYEE}});
+
+        if(!role){
+            return res.status(HttpStatuses.BAD_REQUEST).send("Role not exist!");
+        }
+
+        const createdUser = await this.userRoleRepository.create({userId: user.id, roleId:role.id});
+
+        if(!createdUser){
+            return res.sendStatus(HttpStatuses.BAD_REQUEST);
+        }
+
+        await this.sendEmailToNewUsersHandler.handle(user);
+
+        return res.send(user);
+
+    }
+
     async me(req, res) {
         return res.send(req.loggedUser);
     }
@@ -47,7 +82,7 @@ class AuthController {
     async recoverPasswordSendMail(req, res) {
         const hash = crypto.randomBytes(10).toString('hex');
         const { expiresIn } = config.password;
-        const { email } = req.body;
+        const { email, callback } = req.body;
 
         const user = await this.userRepository.findOne({
             where: { email }
@@ -63,7 +98,7 @@ class AuthController {
             expireIn: moment().add(expiresIn, 'ms')
         });
 
-        this.sendEmailToRecoverPasswordHandler.handle(user, hash);
+        await this.sendEmailToRecoverPasswordHandler.handle(user, hash, callback);
 
         return res.sendStatus(HttpStatuses.NO_CONTENT);
     }
@@ -79,7 +114,7 @@ class AuthController {
 
         await recover.destroy();
 
-        return res.sendStatus(HttpStatuses.NO_CONTENT);
+        return res.status(HttpStatuses.OK).send("OK");
     }
 }
 

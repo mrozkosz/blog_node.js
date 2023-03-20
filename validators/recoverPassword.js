@@ -8,21 +8,7 @@ const update = [
         .withMessage('should be not empty')
         .bail()
         .isLength({ min: 6, max: 32 })
-        .withMessage('Password must be 6-32 characters in length'),
-
-    body('passwordRepeat')
-        .trim()
-        .not()
-        .isEmpty()
-        .withMessage('should be not empty')
-        .bail()
-        .custom(async (passwordRepeat, { req }) => {
-            const { password } = req.body;
-
-            if (password !== passwordRepeat) {
-                return Promise.reject('Passwords does not match');
-            }
-        })
+        .withMessage('Password must be 6-32 characters in length')
 ];
 
 const create = [
@@ -33,7 +19,13 @@ const create = [
         .withMessage('should be not empty')
         .bail()
         .isEmail()
-        .withMessage('Email address is not valid!')
+        .withMessage('Email address is not valid!'),
+    body('callback')
+        .trim()
+        .not()
+        .isEmpty()
+        .withMessage('should be not empty')
+        .bail()
 ];
 
 module.exports = {

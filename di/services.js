@@ -3,6 +3,7 @@ const LoginHandler = require('../services/LoginHandler');
 const MailerFactory = require('../services/MailerFactory');
 const SendEmailToRecoverPasswordHandler = require('../services/mailer/SendEmailToRecoverPasswordHandler');
 const SendEmailToNewUserHandler = require('../services/mailer/SendEmailToNewUserHandler');
+const SendEmailToNewUsersHandler = require('../services/mailer/SendEmailToNewUserHandler')
 const config = require('../config');
 const { User } = require('../models');
 
@@ -30,4 +31,13 @@ module.exports = (container) => {
         )
         .addArgument(new Reference('services.mailerFactory'))
         .addArgument(config);
+
+    container
+        .register(
+            'services.sendEmailToNewUsersHandler',
+            SendEmailToNewUsersHandler
+        )
+        .addArgument(new Reference('services.mailerFactory'))
+        .addArgument(config);
+
 };
