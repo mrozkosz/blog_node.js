@@ -3,6 +3,7 @@ const mime = require("mime-types");
 const uuidGenerator = require('./uuidGenerator');
 const imageRepository = require('../repositories/ImageRepository');
 const {Op} = require("sequelize");
+const {config} = require("dotenv");
 
 module.exports = async (file, publicPath) => {
     const acceptedMimetypes = [
@@ -55,7 +56,7 @@ module.exports = async (file, publicPath) => {
         await file.mv(`${publicPath}/${fileName}`);
         return {
             success: true,
-            image: fileName,
+            image: config.app.appUrl +'/'+ fileName,
             oldName:"null",
             name: file.name,
             mimetype: file.mimetype
