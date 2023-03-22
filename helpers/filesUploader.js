@@ -3,7 +3,7 @@ const mime = require("mime-types");
 const uuidGenerator = require('./uuidGenerator');
 const imageRepository = require('../repositories/ImageRepository');
 const {Op} = require("sequelize");
-const {config} = require("dotenv");
+const config = require("../config");
 
 module.exports = async (file, publicPath) => {
     const acceptedMimetypes = [
