@@ -100,7 +100,7 @@ class AuthController {
 
         // await this.sendEmailToRecoverPasswordHandler.handle(user, hash, callback);
 
-        return res.status(HttpStatuses.NO_CONTENT).send({message:"This is test api so we not send emails", hash, expireIn: moment().add(expiresIn, 'ms')});
+        return res.status(HttpStatuses.OK).send({message:"This is test api so we not send emails", hash, expireIn: moment().add(expiresIn, 'ms')});
     }
 
     async recoverPassword(req, res) {
