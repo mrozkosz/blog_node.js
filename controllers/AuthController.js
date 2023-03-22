@@ -69,7 +69,7 @@ class AuthController {
             return res.sendStatus(HttpStatuses.BAD_REQUEST);
         }
 
-        await this.sendEmailToNewUsersHandler.handle(user);
+        // await this.sendEmailToNewUsersHandler.handle(user);
 
         return res.send(user);
 
@@ -98,9 +98,9 @@ class AuthController {
             expireIn: moment().add(expiresIn, 'ms')
         });
 
-        await this.sendEmailToRecoverPasswordHandler.handle(user, hash, callback);
+        // await this.sendEmailToRecoverPasswordHandler.handle(user, hash, callback);
 
-        return res.sendStatus(HttpStatuses.NO_CONTENT);
+        return res.status(HttpStatuses.NO_CONTENT).send({message:"This is test api so we not send emails", hash, expireIn: moment().add(expiresIn, 'ms')});
     }
 
     async recoverPassword(req, res) {
