@@ -56,7 +56,7 @@ module.exports = async (file, publicPath) => {
         await file.mv(`${publicPath}/${fileName}`);
         return {
             success: true,
-            image: config.app.appUrl +'/'+ fileName,
+            image: config.app.appUrl +'/image/'+ fileName,
             oldName:"null",
             name: file.name,
             mimetype: file.mimetype
