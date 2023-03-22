@@ -32,6 +32,10 @@ module.exports = {
         type: Sequelize.STRING,
         allowNull: false,
       },
+      excerpt:{
+        type: Sequelize.STRING,
+        allowNull: true,
+      },
       blogPost:{
         type: Sequelize.TEXT,
         allowNull: true,
@@ -51,6 +55,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
+
   },
 
   down: (queryInterface, Sequelize) => {

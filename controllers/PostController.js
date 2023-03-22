@@ -2,6 +2,7 @@ const HttpStatuses = require("http-status-codes");
 const { Op } = require("sequelize");
 const slugify = require('../helpers/slugGenerator');
 const {now} = require("moment");
+const htmlToString = require('../helpers/htmlToText');
 
 class PostController {
     constructor(postRepository) {
@@ -97,7 +98,9 @@ class PostController {
             return res.status(HttpStatuses.NOT_FOUND).send('Post not exist!');
         }
 
-        const x = await existingPost.update({title, blogPost, image, slug});
+        const excerpt = await htmlToString(blogPost, 150);
+
+        const x = await existingPost.update({title, blogPost, image, slug, excerpt});
 
         return res.send(x);
     }
@@ -122,8 +125,10 @@ class PostController {
             return res.status(HttpStatuses.BAD_REQUEST).send('Post already exist');
         }
 
+        const excerpt = await htmlToString(blogPost, 150);
+
         const post = await this.postRepository.create({
-            title, blogPost, image, author: parseInt(loggedUser.id), slug, updatedAt: now()
+            title, blogPost, excerpt, image, author: parseInt(loggedUser.id), slug, updatedAt: now()
         });
         if(!post){
             return res.status(HttpStatuses.BAD_REQUEST).send('Something went wrong..., post not created! :(');

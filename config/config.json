@@ -8,12 +8,12 @@
     "operatorsAliases": false
   },
   "test": {
-    "username": "root",
-    "password": "password",
-    "database": "blog",
-    "host": "127.0.0.1",
-    "port": 3308,
-    "dialect": "mysql",
+    "username": "postgres",
+    "password": "2sOLpNp7DrJNisYO",
+    "database": "postgres",
+    "host": "db.orrtlsqwkvwwnsguglea.supabase.co",
+    "port": 5432,
+    "dialect": "postgres",
     "operatorsAliases": false
   },
   "production": {

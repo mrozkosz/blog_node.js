@@ -19,8 +19,12 @@ module.exports = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
         },
-        blogPost:{
+        excerpt:{
             type: Sequelize.TEXT,
+            allowNull: true,
+        },
+        blogPost:{
+            type: Sequelize.STRING,
             allowNull: true,
         },
         author: {
